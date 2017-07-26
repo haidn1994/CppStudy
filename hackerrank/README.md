@@ -59,3 +59,58 @@ C++의 getline()은 주의해야 할 사항이 있는데, 그건 웹페이지에
 한가지 더, 루프의 조건절에는 되도록이면 함수를 집어넣지 않는 쪽이 좋다.  
 일단 조건 검사를 할 때마다 함수를 호출해버려서 시간 복잡도가 O(N)이 되어버린다.  
 물론 vector.size()처럼 예외도 있지만, 말 그대로 예외일 뿐이다. 주의하자.
+
+## Day 7
+
+문제자체는 그냥 배열을 거꾸로 출력하면 끝나는 싱거운 문제였지만, 진짜로 문자열이나 배열을 뒤집으라고 요구하거나,  
+저번에 codility에서 나왔던 문제처럼 cyclic_rotation같은 문제를 낸다면 어떻게 해야할 것인가?
+당연히 잘 익혀놓아야 할 주제이다. 문자열 뒤집는 코드, 배열 뒤집는 코드를 공부하자.
+
+## Day 8
+
+이 단원은 상당히 중요하다. 먼저 map의 문법을 잘 보라! end(), find(), []또는 insert()를 쓰는 방법을 잘 익혀야 한다.  
+그리고 주석에도 적어놓았듯이 문제를 잘 읽고 조건을 잘 살펴야 한다. 그리고 입력이 몇 개인지 주어지지 않았다면,  
+scanf나 cin의 반환값을 이용해서 입력을 EOF까지 받는 것으로 하면 된다.
+
+```{.cc}
+#include <cmath>
+#include <cstdio>
+#include <cstring>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <string>
+#include <map>
+using namespace std;
+
+char key[50];
+
+int main() {
+	int value;
+	map<string, int> phonebook;
+	int n, i; cin >> n;
+
+	for(i = 0; i < n; i++){
+		scanf("%s", key);
+		scanf("%d", &value);
+		phonebook[key] = value;
+	}
+
+	// 왜 이 코드가 말썽을 부렸느냐 하면, 출력이 초과되었기 때문이다.
+	// 쿼리와 n이 같다는 조건은 없다. 단지 상한성과 하한선만 같을 뿐이다.
+	// 즉, 얼마나 출력하라고 하는 쿼리의 갯수를 조절해 주는 코드를 담아줘야 한다. 
+	// 이 문제는 백준 알고리즘 저지 10989문제에서도 한번 걸렸던 함정이다. 조심하도록 하자.
+	while(scanf("%s", key) != EOF){
+		if(phonebook.find(key) == phonebook.end())
+			printf("Not found\n");
+		else
+			printf("%s=%d\n", key, phonebook.find(key)->second);
+		//cout << key << "=" << phonebook.find(key)->second << '\n';
+	}
+	return 0;
+}
+```
+
+## Day 9
+
+재귀에 관한 문제인데, 그냥 factorial을 만드는 문제다. 너무 싱거운 문제이므로 그냥 넘어간다.

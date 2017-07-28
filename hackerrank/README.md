@@ -114,3 +114,45 @@ int main() {
 ## Day 9
 
 재귀에 관한 문제인데, 그냥 factorial을 만드는 문제다. 너무 싱거운 문제이므로 그냥 넘어간다.
+
+## Day 10
+
+비트 다루기에 대한 문제인데, 비트 다루는 것은 많이 하지 않기 때문에 연습문제가 많이 필요하다.  
+어쨌든 이문제는 codility의 첫문제는 binaryGap의 쉬운 버전이라고 생각하면 된다.
+
+```{.c}
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+
+// codility의 binaryGap문제와 거의 유사한데, 전처리가 필요없어서 쉬운 문제다!
+
+int main() {
+	unsigned int size_checker = 0x80000000;
+	unsigned int res_checker = 0x00000001;
+	int n, range = 0, res = 0, i;
+	int res_candi = 0;
+	cin >> n;
+
+	// 쉬프트 연산도 =을 넣어서 간단하게 만들어 주는 잊지 말것!
+	// 그리고 int형 정수는 32번째 비트까지 있다는 것도 잊지 말것
+	// 비트 다루는 법을 확실하게 익혀야 할 것 같다. 이런 문제가 적게 나온다는 보장이 없다!
+	for(i = 0; i < 32; i++, res_checker <<= 1){
+		if(res_checker & n){
+			res++;
+		} else{
+			if(res_candi <= res)
+				res_candi = res;
+			res = 0;
+		}
+	}
+
+	cout << res_candi;
+	return 0;
+}
+
+```

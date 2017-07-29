@@ -156,3 +156,50 @@ int main() {
 }
 
 ```
+
+## Day 12
+
+C++의 상속에 관한 문제인데, 역시 C++문법은 좀 어렵다는 생각이 든다.
+
+```{.cc}
+class Student :  public Person{
+	private:
+		vector<int> testScores;  
+	public:
+		Student(string firstName, string lastName, int indentification, vector<int> &scores) 
+			: Person(firstName, lastName, indentification){
+			this->testScores = scores;
+		}
+		char calculate(){
+			int sum = 0, mean;
+			int range, i;
+
+			range = this->testScores.size();
+			for(i = 0; i < range; i++)
+				sum += testScores[i];
+			mean = sum/range;
+
+			return mean >= 90 ? 'O' :
+				(80 <= mean && mean < 90) ? 'E' :
+				(70 <= mean && mean < 80) ? 'A' :
+				(55 <= mean && mean < 70) ? 'P' :
+				(40 <= mean && mean < 55) ? 'D' : 'T';
+		}
+		/*	
+		 *   Class Constructor
+		 *   
+		 *   Parameters:
+		 *   firstName - A string denoting the Person's first name.
+		 *   lastName - A string denoting the Person's last name.
+		 *   id - An integer denoting the Person's ID number.
+		 *   scores - An array of integers denoting the Person's test scores.
+		 */
+		// Write your constructor here
+
+		/*	
+		 *   Function Name: calculate
+		 *   Return: A character denoting the grade.
+		 */
+		// Write your function here
+};
+```
